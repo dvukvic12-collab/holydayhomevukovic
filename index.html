@@ -3,90 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Home Vuković | Saborsko</title>
+    
+    <title>Holiday Home Vuković | Saborsko - Priroda i Odmor</title>
+    <meta name="description" content="Holiday Home Vuković Saborsko - smještaj za 9 osoba blizu Plitvičkih jezera. 3 spavaće sobe, terasa, dječje igralište i autentični lički ugođaj.">
+    <meta name="keywords" content="Saborsko, Plitvička jezera, Holiday Home Vuković, smještaj Lika, kuća za odmor, smještaj 9 osoba">
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #b2935b; --text: #1a1a1a; --bg: #fdfdfd; }
-        body { font-family: 'Montserrat', sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.7; }
-        
-        /* VIDEO POZADINA */
-        .hero { 
-            position: relative; height: 100vh; overflow: hidden; 
-            display: flex; align-items: center; justify-content: center; color: white;
-        }
-        video#bg-video {
-            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
-            width: auto; height: auto; transform: translate(-50%, -50%); z-index: -1; object-fit: cover;
-        }
-        .hero-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3); }
+        :root { --gold: #b2935b; --dark: #1a1a1a; --light: #fdfdfd; --grey: #f4f4f4; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.7; scroll-behavior: smooth; }
 
-        .hero-content { z-index: 1; text-align: center; }
-        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 6rem); margin: 0; font-weight: 400; }
+        /* HERO VIDEO */
+        .hero { position: relative; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+        video#bg-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); z-index: -1; object-fit: cover; background: url('slike/eksterijer/naslovna.jpg') center/cover; }
+        .hero-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.35); }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); margin: 0; z-index: 1; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; text-align: center; }
-        .divider { width: 40px; height: 1px; background: var(--accent); margin: 30px auto; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 100px 20px; text-align: center; }
+        .divider { width: 60px; height: 1px; background: var(--gold); margin: 30px auto; }
 
-        /* MOZAIK GALERIJA */
-        .gallery-masonry {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;
-        }
-        .gallery-masonry img { width: 100%; height: 450px; object-fit: cover; transition: 0.6s; border-radius: 3px; }
-        .gallery-masonry img:hover { transform: scale(1.02); }
+        /* NOSITELJICE PRIČE (6 SLIKA) */
+        .story-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, 25vw); grid-gap: 15px; padding: 0 15px; max-width: 1400px; margin: 0 auto; }
+        .story-item { position: relative; overflow: hidden; border-radius: 2px; }
+        .story-item img { width: 100%; height: 100%; object-fit: cover; transition: 1s ease; }
+        .story-item:hover img { transform: scale(1.05); }
+        .s-1 { grid-column: 1/4; grid-row: 1/2; } .s-2 { grid-column: 4/7; grid-row: 1/2; }
+        .s-3 { grid-column: 1/3; grid-row: 2/3; } .s-4 { grid-column: 3/5; grid-row: 2/3; } .s-5 { grid-column: 5/7; grid-row: 2/3; }
 
-        .btn-premium {
-            display: inline-block; padding: 20px 50px; border: 1px solid var(--accent);
-            color: var(--accent); text-decoration: none; text-transform: uppercase;
-            letter-spacing: 3px; font-size: 0.8rem; transition: 0.5s; margin: 10px;
-        }
-        .btn-premium:hover { background: var(--accent); color: white; }
+        /* FILTRIRANA GALERIJA */
+        .gallery-nav button { background: none; border: none; font-family: 'Montserrat'; text-transform: uppercase; letter-spacing: 2px; padding: 10px 20px; cursor: pointer; color: #888; border-bottom: 2px solid transparent; }
+        .gallery-nav button.active { color: var(--gold); border-bottom: 2px solid var(--gold); font-weight: 600; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-top: 40px; }
+        .gallery-grid img { width: 100%; height: 280px; object-fit: cover; border-radius: 2px; transition: 0.4s; }
 
-        footer { padding: 80px; background: #111; color: #555; text-align: center; font-size: 0.7rem; letter-spacing: 2px; }
+        /* KONTAKTI */
+        .contact-card { background: white; padding: 30px; border: 1px solid #eee; margin: 10px; flex: 1; min-width: 280px; }
+        .contact-label { color: var(--gold); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; font-weight: 600; }
+        .contact-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 10px 0; }
+        .btn-gold { display: inline-block; padding: 12px 30px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; transition: 0.4s; margin-top: 10px; }
+        .btn-gold:hover { background: var(--gold); color: white; }
+
+        @media (max-width: 768px) { .story-grid { display: flex; flex-direction: column; } .story-item { height: 300px; } .flex-contacts { flex-direction: column; } }
     </style>
 </head>
 <body>
 
-    <section class="hero">
+    <header class="hero">
         <div class="hero-overlay"></div>
-        <video id="bg-video" autoplay muted loop playsinline>
-            <source src="video.mp4" type="video/mp4">
-        </video>
-        <div class="hero-content">
-            <p style="text-transform: uppercase; letter-spacing: 6px;">Oaza u Saborskom</p>
+        <video id="bg-video" autoplay muted loop playsinline><source src="video.mp4" type="video/mp4"></video>
+        <div class="hero-content" style="z-index: 1;">
+            <p style="letter-spacing: 10px;">SABORSKO — LIKA</p>
             <h1>Vuković Hiža</h1>
+        </div>
+    </header>
+
+    <section class="container">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 400; margin:0;">Autentičan Odmor</h2>
+        <div class="divider"></div>
+        <p style="max-width: 800px; margin: 0 auto; color: #555;">Holiday Home Vuković nudi prostran smještaj od 90m² za do 9 osoba. Smješteni u Saborskom, na vrhu planine Kapela, pružamo vam mir, najčišći planinski zrak i blizinu NP Plitvička jezera (18 km).</p>
+    </section>
+
+    <section class="story-grid">
+        <div class="story-item s-1"><img src="slike/eksterijer/naslovna.jpg" alt="Vuković Hiža"></div>
+        <div class="story-item s-2"><img src="slike/eksterijer/snijeg.jpg" alt="Zima"></div>
+        <div class="story-item s-3"><img src="slike/eksterijer/terasa-pogled.jpg" alt="Terasa pogled"></div>
+        <div class="story-item s-4"><img src="slike/interijer/kuhinja.jpg" alt="Kuhinja"></div>
+        <div class="story-item s-5"><img src="slike/interijer/soba.jpg" alt="Soba"></div>
+    </section>
+
+    <section class="container" id="galerija">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400;">Galerija / Gallery</h2>
+        <div class="gallery-nav" style="margin-top: 20px;">
+            <button class="active" onclick="filterGallery('all', this)">Sve</button>
+            <button onclick="filterGallery('exterior', this)">Eksterijer</button>
+            <button onclick="filterGallery('interior', this)">Interijer</button>
+        </div>
+
+        <div class="gallery-grid" id="main-gallery">
+            <img src="slike/eksterijer/terasa-unutra.jpg" class="exterior">
+            <img src="slike/eksterijer/igraliste.jpg" class="exterior">
+            <img src="slike/eksterijer/vrt.jpg" class="exterior">
+            <img src="slike/interijer/dnevni-boravak.jpg" class="interior">
+            </div>
+    </section>
+
+    <section style="background: var(--grey); padding: 100px 20px;">
+        <div class="container" style="padding: 0;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 400;">Kontaktirajte Nas</h2>
+            <div class="divider"></div>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 40px;" class="flex-contacts">
+                <div class="contact-card">
+                    <span class="contact-label">Primarni Kontakt</span>
+                    <div class="contact-name">Vlasnik (Ja)</div>
+                    <p>099 2471 395</p>
+                    <a href="https://wa.me/385992471395" class="btn-gold">WhatsApp</a>
+                    <a href="viber://chat?number=385992471395" class="btn-gold">Viber</a>
+                </div>
+
+                <div class="contact-card">
+                    <span class="contact-label">Sekundarni Kontakt</span>
+                    <div class="contact-name">Otac</div>
+                    <p>091 7278 225</p>
+                    <a href="https://wa.me/385917278225" class="btn-gold">WhatsApp</a>
+                </div>
+
+                <div class="contact-card">
+                    <span class="contact-label">Tercijalni Kontakt</span>
+                    <div class="contact-name">Majka</div>
+                    <p>098 912 9216</p>
+                    <a href="https://wa.me/385989129216" class="btn-gold">WhatsApp</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <div class="container">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 400;">Gdje se priroda i udobnost susreću</h2>
-        <div class="divider"></div>
-        <p style="max-width: 800px; margin: 0 auto; color: #666; font-size: 1.1rem; font-weight: 300; font-style: italic;">
-            Okruženi mirisom borove šume i tišinom Like, nudimo vam utočište od svakodnevice. 
-            Naš dom je stvoren za sjećanja, bilo uz kamin pod snježnim krovom ili na ljetnoj terasi s pogledom koji oduzima dah.
-        </p>
-    </div>
-
-    <div style="padding: 0 20px 100px;">
-        <div class="gallery-masonry">
-            <img src="snijeg.jpg" alt="Zimska idila">
-            <img src="kamin.jpg" alt="Toplina doma">
-            <img src="dron.jpg" alt="Pogled iz zraka">
-            <img src="interijer.jpg" alt="Dizajn unutrašnjosti">
-        </div>
-    </div>
-
-    <section style="background: #f9f9f9; padding: 100px 20px; text-align: center;">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 400;">Rezervirajte Vaš boravak</h2>
-        <div class="divider"></div>
-        <div style="margin-top: 40px;">
-            <a href="https://wa.me/38591555555" class="btn-premium">Pošalji Upit</a>
-            <a href="LINK_AIRBNB" class="btn-premium">Airbnb</a>
-            <a href="LINK_BOOKING" class="btn-premium">Booking.com</a>
-        </div>
+    <section style="line-height: 0;">
+        <iframe src="http://googleusercontent.com/maps.google.com/7" width="100%" height="500" style="border:0; filter: grayscale(100%);" allowfullscreen="" loading="lazy"></iframe>
     </section>
 
     <footer>
-        &copy; 2026 HOLIDAY HOME VUKOVIĆ | LIKA, HRVATSKA
+        &copy; 2026 HOLIDAY HOME VUKOVIĆ | SABORSKO, CROATIA | <a href="https://hr.airbnb.com/rooms/4904978" style="color: #666; text-decoration: none;">Airbnb</a> | <a href="https://www.booking.com/hotel/hr/apartment-vukovic.hr.html" style="color: #666; text-decoration: none;">Booking.com</a>
     </footer>
 
+    <script>
+        function filterGallery(type, btn) {
+            const imgs = document.querySelectorAll('#main-gallery img');
+            const btns = document.querySelectorAll('.gallery-nav button');
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            imgs.forEach(img => {
+                if (type === 'all') img.style.display = 'block';
+                else if (img.classList.contains(type)) img.style.display = 'block';
+                else img.style.display = 'none';
+            });
+        }
+    </script>
 </body>
 </html>
